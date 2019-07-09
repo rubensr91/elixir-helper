@@ -24,7 +24,7 @@ defmodule ElixirHelper.Api.Logic do
        when is_binary(season_param) and byte_size(season_param) > 0 do
     Logger.info("Filtering by season => #{inspect season_param}")
 
-    {:ok, Enum.filter(file, &(&1["season"] == season_param))}
+    {:ok, Enum.filter(file, fn x -> x["season"] == season_param end)}
   end
   def filter_or_not_by_season(file, _params) do 
     Logger.info("No season filter found")
@@ -37,7 +37,7 @@ defmodule ElixirHelper.Api.Logic do
        when is_binary(div_param) and byte_size(div_param) > 0 do
     Logger.info("Filtering by division => #{inspect div_param}")
 
-    {:ok, Enum.filter(file, &(&1["div"] == div_param))}
+    {:ok, Enum.filter(file, fn x -> x["div"] == div_param end)}
   end
   def filter_or_not_by_div({:ok, file}, _params) do 
     Logger.info("No division filter found")
