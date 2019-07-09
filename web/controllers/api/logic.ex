@@ -6,36 +6,55 @@ defmodule ElixirHelper.Api.Logic do
   alias NimbleCSV.RFC4180, as: CSV
 
   @data "data.csv" |> File.read! |> CSV.parse_string()
-         |> Enum.map(fn [_coma,div,season,date,hometeam,awayteam,fthg,ftag,ftr,hthg,htag,htr] ->
-          %{div: div,season: season,date: date,hometeam: hometeam,awayteam: awayteam,fthg: fthg,ftag: ftag,
-             ftr: ftr,hthg: hthg,htag: htag,htr: htr}
+         |> Enum.map(fn [_coma, div, season, date, hometeam, awayteam, fthg, ftag, ftr, hthg, htag, htr] ->
+          %{"div" => div, "season" => season, "date" => date, "hometeam" => hometeam, "awayteam" => awayteam, 
+          "fthg" => fthg, "ftag" => ftag, "ftr" => ftr, "hthg" => hthg, "htag" => htag, "htr" => htr}
          end)
 
-  @spec run(binary() | []) :: {:error, <<_::144>>} | {:ok, binary()}
-
-  def run(params \\ nil) do
-    filter_or_not_by_params(@data, params)
+  def run(conn) do
+    Logger.info("Running application")
+    
+    filter_or_not_by_season(@data, conn.query_params["season"])
+    |> filter_or_not_by_div(conn.query_params["div"])
     |> encode_file()
   end
 
-  @spec filter_or_not_by_params({:error, <<_::144>>} | {:ok, [any()]}, <<_::144>>) ::
-          {:error, <<_::144>>} | {:ok, [any()]}
+  def filter_or_not_by_season({:error, _reason} = error, _params), do: error
+  def filter_or_not_by_season(file, season_param)
+       when is_binary(season_param) and byte_size(season_param) > 0 do
+    Logger.info("Filtering by season => #{inspect season_param}")
 
-  def filter_or_not_by_params({:error, _reason} = error, _params), do: error
-  def filter_or_not_by_params(file, param)
-       when is_binary(param) and byte_size(param) > 0 do
-    {:ok, Enum.filter(file, &(&1.season == param))}
+    {:ok, Enum.filter(file, &(&1["season"] == season_param))}
   end
-  def filter_or_not_by_params(file, _params), do: {:ok, file}
+  def filter_or_not_by_season(file, _params) do 
+    Logger.info("No season filter found")
 
+    {:ok, file}
+  end
 
-  @spec encode_file({:error, <<_::144>>} | {:ok, [any()]}) ::
-          {:error, <<_::144>>} | {:ok, binary()}
+  def filter_or_not_by_div({:error, _reason} = error, _params), do: error
+  def filter_or_not_by_div({:ok, file}, div_param)
+       when is_binary(div_param) and byte_size(div_param) > 0 do
+    Logger.info("Filtering by division => #{inspect div_param}")
+
+    {:ok, Enum.filter(file, &(&1["div"] == div_param))}
+  end
+  def filter_or_not_by_div({:ok, file}, _params) do 
+    Logger.info("No division filter found")
+
+    {:ok, file}    
+  end
 
   def encode_file({:ok, file}) do
+    Logger.info("Encondig #{Enum.count(file)} results")
+
     {:ok,
      file
      |> Jason.encode!()}
   end
-  def encode_file({:error, _reason} = error), do: error
+  def encode_file({:error, _reason} = error) do
+    Logger.error("Error encoding file #{inspect error}")
+
+    error
+  end
 end
