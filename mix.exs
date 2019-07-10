@@ -40,7 +40,8 @@ defmodule ElixirHelper.Mixfile do
       {:nimble_csv, "~> 0.6"},
       {:mix_test_watch, "~> 0.8", only: [:dev, :test], runtime: false},
       {:jason, "~> 1.1.2"},
-      {:excoveralls, "~> 0.8", only: :test}
+      {:excoveralls, "~> 0.8", only: :test},
+      {:distillery, "~> 2.1"}
     ]
   end
 end

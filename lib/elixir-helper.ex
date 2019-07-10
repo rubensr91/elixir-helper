@@ -4,7 +4,7 @@ defmodule ElixirHelper do
   """
 
   use Application
-
+  require Logger
   alias Plug.Cowboy
   alias ElixirHelper.VersionController
   alias ElixirHelper.Metrics
@@ -14,6 +14,8 @@ defmodule ElixirHelper do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    Logger.info("Starting application")
+      
     Metrics.setup()
     Exporter.setup()
     Instrumenter.setup()
