@@ -10,6 +10,7 @@ defmodule ElixirHelper do
   alias ElixirHelper.Metrics
   alias ElixirHelper.Web.Router
   alias ElixirHelper.Metrics.{Exporter, Instrumenter}
+  alias ElixirHelper.Api.Ets
 
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
@@ -21,6 +22,8 @@ defmodule ElixirHelper do
     Instrumenter.setup()
 
     Metrics.inc(:version, labels: [VersionController.get_commit_version()])
+
+    Ets.run()
 
     children = [
       Cowboy.child_spec(

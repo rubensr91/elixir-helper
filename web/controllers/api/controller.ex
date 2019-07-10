@@ -5,9 +5,13 @@ defmodule ElixirHelper.Api.Controller do
   require Logger
 
   alias ElixirHelper.Api.Logic
+  alias ElixirHelper.Api.Ets
 
   @spec run(Plug.Conn.t(), any) :: Plug.Conn.t()
   def run(conn, _params \\ []) do
+
+    Ets.lookup_all |> IO.inspect
+
     conn
     |> Logic.run()
     |> response(conn)
