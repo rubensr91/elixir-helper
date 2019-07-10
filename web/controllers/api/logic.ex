@@ -28,7 +28,6 @@ defmodule ElixirHelper.Api.Logic do
   end
   def filter_or_not_by_params(file, _params), do: {:ok, file}
 
-
   @spec encode_file({:error, <<_::144>>} | {:ok, [any()]}) ::
           {:error, <<_::144>>} | {:ok, binary()}
 
