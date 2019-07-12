@@ -25,15 +25,8 @@ RUN cd ~/ \
 	&& mix local.hex --force \
 	&& mix local.rebar --force \
 	&& mix deps.get \
-	&& mix compile 
-
-RUN cd ~/elixir-helper \
-	&& mix local.hex --force \
-	&& mix local.rebar --force \
 	&& mix compile \
 	&& mix release --force
 
 CMD cd \
-	&& cd elixir-helper \
-	&& ls \
-	&& _build/prod/rel/elixir_helper/bin/elixir_helper start
+	&& elixir-helper/_build/prod/rel/elixir_helper/bin/elixir_helper start
