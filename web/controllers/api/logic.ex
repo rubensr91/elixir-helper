@@ -5,7 +5,7 @@ defmodule ElixirHelper.Api.Logic do
   require Logger
   alias NimbleCSV.RFC4180, as: CSV
 
-  @data "~/elixir-helper/_build/data.csv" |> File.read! |> CSV.parse_string()
+  @data "~/elixir-helper/data.csv" |> File.read! |> CSV.parse_string()
          |> Enum.map(fn [_coma, div, season, date, hometeam, awayteam, fthg, ftag, ftr, hthg, htag, htr] ->
           %{"div" => div, "season" => season, "date" => date, "hometeam" => hometeam, "awayteam" => awayteam, 
           "fthg" => fthg, "ftag" => ftag, "ftr" => ftr, "hthg" => hthg, "htag" => htag, "htr" => htr}

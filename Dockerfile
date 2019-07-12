@@ -32,7 +32,8 @@ RUN cd ~/elixir-helper \
 	&& mix local.rebar --force \
 	&& mix compile \
 	&& mix release --force
-# && iex -S mix
 
 CMD cd \
-	&& elixir-helper/_build/prod/rel/elixir_helper/bin/elixir_helper start
+	&& cd elixir-helper \
+	&& ls \
+	&& _build/prod/rel/elixir_helper/bin/elixir_helper start
