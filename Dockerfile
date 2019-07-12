@@ -30,6 +30,12 @@ RUN cd ~/ \
 
 RUN cd \
 	&& cd elixir-helper/ \
+	&& ls \
+	&& ls
+
+RUN cd \
+	&& cd elixir-helper/ \
+	&& ls \
 	&& ls
 
 CMD cd \
