@@ -33,10 +33,5 @@ RUN cd \
 	&& ls \
 	&& ls
 
-RUN cd \
-	&& cd elixir-helper/ \
-	&& ls \
-	&& ls
-
 CMD cd \
 	&& elixir-helper/_build/prod/rel/elixir_helper/bin/elixir_helper start
