@@ -33,7 +33,7 @@ defmodule ElixirHelper.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 1.4"},
-      {:plug_cowboy, "~> 2.0"},
+      {:plug_cowboy, "~> 2.1.0"},
       {:plug, "~> 1.3"},
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.5"},
