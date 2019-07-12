@@ -10,7 +10,9 @@ defmodule ElixirHelper.Api.Controller do
   @spec run(Plug.Conn.t(), any) :: Plug.Conn.t()
   def run(conn, _params \\ []) do
 
-    Ets.lookup_all |> IO.inspect
+    Enum.each(
+      Ets.lookup_all, fn x -> IO.inspect x end
+    )
 
     conn
     |> Logic.run()

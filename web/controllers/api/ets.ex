@@ -14,7 +14,7 @@ defmodule ElixirHelper.Api.Ets do
 
   defp create_table() do
     if :ets.info(@ets_table) == :undefined do
-        Logger.info("Table ets #{@ets_table} created")
+      Logger.info("Table ets #{@ets_table} created")
       :ets.new(@ets_table, [:public, :named_table])
     end
   end
@@ -40,9 +40,8 @@ defmodule ElixirHelper.Api.Ets do
   def put(value) do
     case :ets.insert(@ets_table, value) do
       true -> :ok
-        _ -> {:error, "error inserting ets #{inspect @ets_table} #{inspect value}"}
-      end    
-
+      _ -> {:error, "error inserting ets #{inspect @ets_table} #{inspect value}"}
+    end    
   end
 
 #   def search(param) do
