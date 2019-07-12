@@ -25,8 +25,7 @@ RUN cd ~/ \
 	&& mix local.hex --force \
 	&& mix local.rebar --force \
 	&& mix deps.get \
-	&& mix compile \
-	&& mix release --force
+	&& mix release 
 
 RUN cd \
 	&& cd elixir-helper/ \

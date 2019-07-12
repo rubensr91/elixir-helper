@@ -6,23 +6,15 @@ config :logger, :console,
   format: "$date $time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# 30 mins, in ms
-config :elixir_helper, ets_cleanup_period: 30 * 60 * 1000
+# # 30 mins, in ms
+# config :elixir_helper, ets_cleanup_period: 30 * 60 * 1000
 
-# ETS Tables to dump on shutdown
-config :elixir_helper,
-  ets_tables_persistance: [
-    tables: %{
-      elixir_helper: :set
-    }
-  ]
-
-if Mix.env() == :dev do
-  config :mix_test_watch,
-    tasks: [
-      "test --cover",
-      "credo --strict"
-    ]
-end
+# # ETS Tables to dump on shutdown
+# config :elixir_helper,
+#   ets_tables_persistance: [
+#     tables: %{
+#       elixir_helper: :set
+#     }
+#   ]
 
 import_config "#{Mix.env()}.exs"
