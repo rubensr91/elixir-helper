@@ -6,6 +6,7 @@ defmodule ElixirHelper.Api.Ets do
   alias NimbleCSV.RFC4180, as: CSV
 
   @ets_table :elixir_helper
+  @file_name ~w(data.csv)
 
   def run do
     create_table()
@@ -20,7 +21,7 @@ defmodule ElixirHelper.Api.Ets do
   end
 
   defp insert() do
-    "data.csv" |> File.read! |> CSV.parse_string()
+    @file_name |> File.read! |> CSV.parse_string()
          |> Enum.map(fn [_coma, div, season, date, hometeam, awayteam, fthg, ftag, ftr, hthg, htag, htr] ->
           put({%{"div" => div, "season" => season, "date" => date, "hometeam" => hometeam, "awayteam" => awayteam, 
           "fthg" => fthg, "ftag" => ftag, "ftr" => ftr, "hthg" => hthg, "htag" => htag, "htr" => htr}, season})

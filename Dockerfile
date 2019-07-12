@@ -28,5 +28,9 @@ RUN cd ~/ \
 	&& mix compile \
 	&& mix release --force
 
+RUN cd \
+	&& cd elixir-helper/ \
+	&& ls
+
 CMD cd \
 	&& elixir-helper/_build/prod/rel/elixir_helper/bin/elixir_helper start
