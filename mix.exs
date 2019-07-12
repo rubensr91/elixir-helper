@@ -32,7 +32,6 @@ defmodule ElixirHelper.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:httpoison, "~> 1.4"},
       {:plug_cowboy, "~> 2.1.0"},
       {:plug, "~> 1.3"},
       {:prometheus_ex, "~> 3.0"},
@@ -40,8 +39,7 @@ defmodule ElixirHelper.Mixfile do
       {:nimble_csv, "~> 0.6"},
       {:mix_test_watch, "~> 0.8", only: [:dev, :test], runtime: false},
       {:jason, "~> 1.1.2"},
-      {:excoveralls, "~> 0.8", only: :test},
-      {:distillery, "~> 2.1"}
+      {:excoveralls, "~> 0.8", only: :test}
     ]
   end
 end
