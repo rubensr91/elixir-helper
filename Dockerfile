@@ -30,7 +30,9 @@ RUN cd ~/ \
 RUN cd ~/elixir-helper \
 	&& mix local.hex --force \
 	&& mix local.rebar --force \
-	&& mix do compile, release 
+	&& mix compile \
+	&& mix release --force
 # && iex -S mix
 
-CMD ~/elixir-helper/_build/prod/rel/elixir-helper/bin/derivco_sport start
+CMD cd \
+	&& elixir-helper/_build/prod/rel/elixir_helper/bin/elixir_helper start
