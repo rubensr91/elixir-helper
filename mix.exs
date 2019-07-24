@@ -9,7 +9,8 @@ defmodule ElixirHelper.Mixfile do
       test_coverage: [tool: ExCoveralls],
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
     ]
   end
 
@@ -18,7 +19,7 @@ defmodule ElixirHelper.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      extra_applications: [:logger, :plug_cowboy],
+      extra_applications: [:logger],
       mod: {ElixirHelper, []}
     ]
   end
@@ -32,7 +33,6 @@ defmodule ElixirHelper.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:plug_cowboy, "~> 2.1.0"},
       {:plug, "~> 1.3"},
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.5"},
