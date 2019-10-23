@@ -5,6 +5,7 @@ defmodule ElixirHelper.Web.Router do
   """
   use Plug.Router
 
+  alias ElixirHelper.CockroachController, as: Cockroach
   alias ElixirHelper.PingController, as: Ping
   alias ElixirHelper.VersionController, as: Version
 
@@ -13,9 +14,10 @@ defmodule ElixirHelper.Web.Router do
   plug(ElixirHelper.Metrics.Exporter)
   plug(:dispatch)
 
-  get("/ping",    do: Ping.ping(conn))
-  get("/flunk",   do: Ping.flunk(conn))
-  get("/version", do: Version.run(conn))
+  get("/cockroach", do: Cockroach.select(conn))
+  get("/ping",      do: Ping.ping(conn))
+  get("/flunk",     do: Ping.flunk(conn))
+  get("/version",   do: Version.run(conn))
 
   forward("/api", to: ElixirHelper.ApiRouter)
 

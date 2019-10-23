@@ -17,4 +17,17 @@ config :logger, :console,
 #     }
 #   ]
 
+config :elixir_helper, ElixirHelper.Repo, adapter: Ecto.Adapters.Postgres,
+  username: "roach",
+  password: "1234",
+  database: "bank",
+  hostname: "localhost",
+  ssl: true,
+  pool: 10,
+  ssl_opts: [
+    cacertfile: "certs/ca.crt",
+    keyfile: "certs/node.key",
+    certfile: "certs/node.crt"
+  ]
+
 import_config "#{Mix.env()}.exs"

@@ -13,6 +13,7 @@ defmodule ElixirHelper.PingController do
   @spec ping(%Plug.Conn{}) :: %Plug.Conn{}
 
   def ping(conn) do
+
     conn
     |> put_resp_header("content-type", "text/plain")
     |> send_resp(200, "Pong")

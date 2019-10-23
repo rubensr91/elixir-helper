@@ -19,7 +19,7 @@ defmodule ElixirHelper.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :postgrex],
       mod: {ElixirHelper, []}
     ]
   end
@@ -33,7 +33,9 @@ defmodule ElixirHelper.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.3"},
+      {:postgrex, "~> 0.15.1"},
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.5"},
       {:nimble_csv, "~> 0.6"},
