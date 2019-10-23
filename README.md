@@ -26,6 +26,10 @@
 
     cockroach --certs-dir=certs user set roach —password
 
+    # to test everything you must to do:
+    
+    iex -S mix
+    
     {:ok, pid} = Postgrex.start_link(hostname: "localhost",
       port: 26257, username: "roach", password: "1234", database: "bank", ssl: true)
 
