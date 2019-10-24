@@ -45,10 +45,16 @@ defmodule ElixirHelper.CockroachController do
     |> send_resp(200, "You've updated #{inspect result.num_rows} rows")
   end
 
+  def return_code({:ok, %Postgrex.Result{} = result}, conn) do
+    conn
+    |> put_resp_header("content-type", "text/plain")
+    |> send_resp(200, "#{inspect result}")
+  end
+
   def return_code({:error, %Postgrex.Error{} = error}, conn) do
     conn
     |> put_resp_header("content-type", "text/plain")
-    |> send_resp(400, "#{inspect error.postgres.message}")
+    |> send_resp(400, error.postgres.message)
   end
 
 end
