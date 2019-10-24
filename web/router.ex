@@ -5,7 +5,6 @@ defmodule ElixirHelper.Web.Router do
   """
   use Plug.Router
 
-  alias ElixirHelper.CockroachController, as: Cockroach
   alias ElixirHelper.PingController, as: Ping
   alias ElixirHelper.VersionController, as: Version
 

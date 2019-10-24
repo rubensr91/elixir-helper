@@ -16,18 +16,39 @@ defmodule ElixirHelper.CockroachController do
       password: conn.query_params["password"],
       database: conn.query_params["db"], ssl: true)
 
-    sentence =
-      try do
-        Postgrex.query!(pid, conn.query_params["sentence"], [])
-      rescue
-        e in Postgrex.Error -> IO.puts("#{inspect e}")
-      end
+      Postgrex.query(pid, conn.query_params["sentence"], [])
+      |> return_code(conn)
+  end
 
-    IO.inspect sentence
-
+  def return_code({:ok, %Postgrex.Result{command: :select} = result}, conn) do
     conn
     |> put_resp_header("content-type", "text/plain")
-    |> send_resp(200, "#{inspect sentence}")
+    |> send_resp(200,
+      "Columns => #{inspect result.columns}\nValues => #{inspect result.rows}\nRows => #{inspect result.num_rows}")
+  end
+
+  def return_code({:ok, %Postgrex.Result{command: :insert} = result}, conn) do
+    conn
+    |> put_resp_header("content-type", "text/plain")
+    |> send_resp(200, "You've inserted #{inspect result.num_rows} rows")
+  end
+
+  def return_code({:ok, %Postgrex.Result{command: :delete} = result}, conn) do
+    conn
+    |> put_resp_header("content-type", "text/plain")
+    |> send_resp(200, "You've deleted #{inspect result.num_rows} rows")
+  end
+
+  def return_code({:ok, %Postgrex.Result{command: :update} = result}, conn) do
+    conn
+    |> put_resp_header("content-type", "text/plain")
+    |> send_resp(200, "You've updated #{inspect result.num_rows} rows")
+  end
+
+  def return_code({:error, %Postgrex.Error{} = error}, conn) do
+    conn
+    |> put_resp_header("content-type", "text/plain")
+    |> send_resp(400, "#{inspect error.postgres.message}")
   end
 
 end
