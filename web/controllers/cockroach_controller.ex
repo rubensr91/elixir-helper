@@ -8,18 +8,26 @@ defmodule ElixirHelper.CockroachController do
     {:ok, nil}
   end
 
-  @spec select(%Plug.Conn{}) :: %Plug.Conn{}
+  @spec sentence(%Plug.Conn{}) :: %Plug.Conn{}
 
-  def select(conn) do
+  def sentence(conn) do
+    {:ok, pid} = Postgrex.start_link(hostname: conn.query_params["hostname"],
+      port: conn.query_params["port"], username: conn.query_params["user"],
+      password: conn.query_params["password"],
+      database: conn.query_params["db"], ssl: true)
 
-    {:ok, pid} = Postgrex.start_link(hostname: "localhost",
-      port: 26257, username: "roach", password: "1234", database: "bank", ssl: true)
+    sentence =
+      try do
+        Postgrex.query!(pid, conn.query_params["sentence"], [])
+      rescue
+        e in Postgrex.Error -> IO.puts("#{inspect e}")
+      end
 
-    res = Postgrex.query!(pid, "select * from bank.accounts", [])
-    IO.inspect res.rows
+    IO.inspect sentence
 
     conn
     |> put_resp_header("content-type", "text/plain")
-    |> send_resp(200, "res")
+    |> send_resp(200, "#{inspect sentence}")
   end
+
 end

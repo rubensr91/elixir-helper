@@ -14,12 +14,12 @@ defmodule ElixirHelper.Web.Router do
   plug(ElixirHelper.Metrics.Exporter)
   plug(:dispatch)
 
-  get("/cockroach", do: Cockroach.select(conn))
   get("/ping",      do: Ping.ping(conn))
   get("/flunk",     do: Ping.flunk(conn))
   get("/version",   do: Version.run(conn))
 
-  forward("/api", to: ElixirHelper.ApiRouter)
+  forward("/api",       to: ElixirHelper.ApiRouter)
+  forward("/cockroach", to: ElixirHelper.CockroachRouter)
 
   match _ do
     send_resp(conn, 404, "oops")
