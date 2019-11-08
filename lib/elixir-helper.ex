@@ -16,7 +16,7 @@ defmodule ElixirHelper do
     import Supervisor.Spec, warn: false
 
     Logger.info("Starting application")
-      
+
     Metrics.setup()
     Exporter.setup()
     Instrumenter.setup()
@@ -25,12 +25,16 @@ defmodule ElixirHelper do
 
     # Ets.run()
 
+    # children = [
+    #   Cowboy.child_spec(
+    #     scheme: :http,
+    #     plug: Router,
+    #     options: [port: Application.get_env(:elixir_helper, :port)]
+    #   )
+    # ]
+
     children = [
-      Cowboy.child_spec(
-        scheme: :http,
-        plug: Router,
-        options: [port: Application.get_env(:elixir_helper, :port)]
-      )
+      ElixirHelper.Repo
     ]
 
     opts = [strategy: :one_for_one, name: ElixirHelper.Supervisor]

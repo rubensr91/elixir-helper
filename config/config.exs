@@ -2,6 +2,15 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
+config :elixir_helper, ecto_repos: [ElixirHelper.Repo]
+
+config :elixir_helper, ElixirHelper.Repo, adapter: Ecto.Adapters.Postgres,
+  database: "bank",
+  username: "rubensr",
+  password: "1234",
+  hostname: "localhost",
+  port: "5432"
+
 config :logger, :console,
   format: "$date $time $metadata[$level] $message\n",
   metadata: [:request_id]
@@ -16,18 +25,5 @@ config :logger, :console,
 #       elixir_helper: :set
 #     }
 #   ]
-
-config :elixir_helper, ElixirHelper.Repo, adapter: Ecto.Adapters.Postgres,
-  username: "roach",
-  password: "1234",
-  database: "bank",
-  hostname: "localhost",
-  ssl: true,
-  pool: 10,
-  ssl_opts: [
-    cacertfile: "certs/ca.crt",
-    keyfile: "certs/node.key",
-    certfile: "certs/node.crt"
-  ]
 
 import_config "#{Mix.env()}.exs"

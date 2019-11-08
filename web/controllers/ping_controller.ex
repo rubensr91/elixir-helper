@@ -5,6 +5,8 @@ defmodule ElixirHelper.PingController do
   """
   import Plug.Conn
   alias ElixirHelper.Api.Logic
+  alias ElixirHelper.App
+  require Logger
 
   def init(_) do
     {:ok, nil}
@@ -13,10 +15,11 @@ defmodule ElixirHelper.PingController do
   @spec ping(%Plug.Conn{}) :: %Plug.Conn{}
 
   def ping(conn) do
+    res = App.keyword_query
 
     conn
     |> put_resp_header("content-type", "text/plain")
-    |> send_resp(200, "Pong")
+    |> send_resp(200, "#{res}")
   end
 
   @spec flunk(%Plug.Conn{}) :: %Plug.Conn{}

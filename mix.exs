@@ -35,7 +35,9 @@ defmodule ElixirHelper.Mixfile do
     [
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.3"},
-      {:postgrex, "~> 0.15.1"},
+      {:ecto_sql, "~> 3.2"},
+      {:postgrex, "~> 0.15.0"},
+      # {:postgrex, "~> 0.15.1"},
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.5"},
       {:nimble_csv, "~> 0.6"},
