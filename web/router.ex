@@ -18,7 +18,7 @@ defmodule ElixirHelper.Web.Router do
   get("/version",   do: Version.run(conn))
 
   forward("/api",       to: ElixirHelper.ApiRouter)
-  forward("/cockroach", to: ElixirHelper.CockroachRouter)
+  forward("/gaming",    to: ElixirHelper.GamingRouter)
 
   match _ do
     send_resp(conn, 404, "oops")

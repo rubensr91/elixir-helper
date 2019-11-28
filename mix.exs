@@ -19,7 +19,7 @@ defmodule ElixirHelper.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      extra_applications: [:logger, :postgrex],
+      extra_applications: [:logger],
       mod: {ElixirHelper, []}
     ]
   end
@@ -35,12 +35,10 @@ defmodule ElixirHelper.Mixfile do
     [
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.3"},
-      {:ecto_sql, "~> 3.2"},
-      {:postgrex, "~> 0.15.0"},
-      # {:postgrex, "~> 0.15.1"},
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.5"},
       {:nimble_csv, "~> 0.6"},
+      {:httpoison, "~> 1.6"},
       {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
       {:jason, "~> 1.1.2"},
       {:excoveralls, "~> 0.8", only: :test}

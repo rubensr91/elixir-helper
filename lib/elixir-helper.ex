@@ -25,16 +25,12 @@ defmodule ElixirHelper do
 
     # Ets.run()
 
-    # children = [
-    #   Cowboy.child_spec(
-    #     scheme: :http,
-    #     plug: Router,
-    #     options: [port: Application.get_env(:elixir_helper, :port)]
-    #   )
-    # ]
-
     children = [
-      ElixirHelper.Repo
+      Cowboy.child_spec(
+        scheme: :http,
+        plug: Router,
+        options: [port: Application.get_env(:elixir_helper, :port)]
+      )
     ]
 
     opts = [strategy: :one_for_one, name: ElixirHelper.Supervisor]
