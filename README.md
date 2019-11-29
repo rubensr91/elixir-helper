@@ -4,7 +4,7 @@
  * mix deps.get
  * mix compile
  * iex -S mix
- * To see if everything run ok, the next step must to return "pong" in the browser
+ * To see if everything run ok, the next step must to return "pong" on the browser
  * http://localhost:4001/ping 
 
 ## COVERALLS
