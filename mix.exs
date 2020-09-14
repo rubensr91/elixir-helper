@@ -42,7 +42,7 @@ defmodule ElixirHelper.Mixfile do
       {:prometheus_plugs, "~> 1.1.5"},
       {:nimble_csv, "~> 0.6"},
       {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:jason, "~> 1.1.2"},
+      {:jason, "~> 1.2.2"},
       {:excoveralls, "~> 0.8", only: :test}
     ]
   end
