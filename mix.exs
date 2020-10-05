@@ -40,7 +40,7 @@ defmodule ElixirHelper.Mixfile do
       # {:postgrex, "~> 0.15.1"},
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.5"},
-      {:nimble_csv, "~> 0.6"},
+      {:nimble_csv, "~> 1.1"},
       {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
       {:jason, "~> 1.1.2"},
       {:excoveralls, "~> 0.8", only: :test}
